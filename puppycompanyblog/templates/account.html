@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row my-5 bg-light bg-opacity-75 rounded">
+  <div class='text-center col-6 offset-3'>
+    <div class = "my-5">
+      <h2>Welcome to the Page for {{current_user.username}}</h2>
+    </div>
+    <div class = "mb-5">
+      <img align='center' src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}">
+    </div>
+    <div class = "mb-5">
+      <p>{{ current_user.email }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="fluid-container">
+  <div class = "row">
+    <div class = "col-6 offset-3">
+      <form  method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+          {{ form.username.label(class = "form-label text-white") }}
+          {{form.username(class= "form-control")  }}
+        </div>
+        <div class="mb-3">
+          {{ form.email.label(class = "form-label text-white") }}
+          {{form.email(class= "form-control")  }}
+        </div>
+        <div class = "mb-3">
+          {{ form.picture.label(class = "form-label text-white") }}
+          {{ form.picture(class="form-control-file text-white") }}
+        </div>
+        <div class="mb-3 text-center">
+            {{ form.submit(class="btn btn-success") }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

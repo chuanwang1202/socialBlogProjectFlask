@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class = "row mt-5">
+    <div class = "card col-6 offset-3 border border-2 border-secondary rounded">
+        <div class = "card-header text-center my-3 rounded">
+            <h2 class = "card-title">{{blog_post.title}}</h2>
+        </div>
+        <div class = "card-body">
+            <p class = "card-text">Written by: <a class = "link-success text-decoration-none" href = "{{url_for('users.user_posts', username = blog_post.author.username)}}">{{blog_post.author.username}}</a></p>
+            <p class = "card-text"><small>Published on: {{blog_post.date.strftime('%B, %d, %Y')}}</small></p>
+            <p class = "card-text">{{blog_post.text}}</p>
+            {% if blog_post.author == current_user: %}
+            <div>
+                <a class = "btn btn-success" href = "{{url_for('blog_posts.update', blog_post_id = blog_post.id)}}">Update the BlogPost</a>
+                <button type = "button" class = "btn btn-warning" data-bs-toggle = "modal" data-bs-target = "#del_modal">Delete</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role = "dialog" id = "del_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete the Blogpost?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to delete this blogpost? </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form action = "{{url_for('blog_posts.delete_post', blog_post_id = blog_post.id)}}" method = "POST">
+            <input class = "btn btn-warning" type = "submit" value = "delete">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
