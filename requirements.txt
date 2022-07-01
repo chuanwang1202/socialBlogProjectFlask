@@ -30,6 +30,7 @@ oauthlib==2.0.7
 Pillow==9.0.1
 pip==21.2.4
 pycparser==2.21
+pyparsing==2.4.7
 python-dateutil==2.7.2
 python-editor==1.0.3
 requests==2.18.4
